@@ -1,5 +1,5 @@
 # Foris - web administration interface for OpenWrt based on NETCONF
-# Copyright (C) 2018 CZ.NIC, z. s. p. o. <https://www.nic.cz>
+# Copyright (C) 2018-2020 CZ.NIC, z. s. p. o. <https://www.nic.cz>
 #
 # Foris is distributed under the terms of GNU General Public License v3.
 # You should have received a copy of the GNU General Public License
@@ -220,8 +220,8 @@ class OpenvpnConfigPage(ConfigPageMixin, OpenvpnConfigHandler):
             bottle.redirect(reverse("config_page", page_name="openvpn"))
 
         bottle.response.set_header("Content-Type", "text/plain")
-        # TODO .ovpn for windows
-        bottle.response.set_header("Content-Disposition", 'attachment; filename="turris.conf"')
+        # .ovpn is prefered in windows, necessary for iOS and shouldn't make a difference in linux
+        bottle.response.set_header("Content-Disposition", 'attachment; filename="turris.ovpn"')
         bottle.response.set_header("Content-Length", len(res["config"]))
         return res["config"]
 
